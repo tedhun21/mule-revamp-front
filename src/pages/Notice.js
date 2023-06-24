@@ -1,5 +1,12 @@
+import { styled } from "styled-components"
+import { MainPage } from "./Home"
+
+const NoticePage = styled(MainPage)``
+
 const Notice = () => {
-    return <div>notinoti</div>
+    return <NoticePage>notinoti</NoticePage>
 }
+
+
 
 export default Notice;

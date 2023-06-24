@@ -11,11 +11,10 @@ code {
     font-family: 'Pretendard', monospace;
 }
 
-main {
-    width:100vw;
-    height:100vh;
-    background:red;
+a {
+    text-decoration: none;
 }
+
 
 @font-face {
     font-family: 'Pretendard Bold';
