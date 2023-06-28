@@ -1,6 +1,6 @@
 import { styled } from "styled-components"
 
-export const MainPage = styled.div`
+export const MainPage = styled.main`
     width: 90%;
     height: 100%;
     border-radius: 30px 0px 0px 0px;

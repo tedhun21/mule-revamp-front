@@ -1,7 +1,7 @@
 import { styled } from "styled-components"
 import { Link } from 'react-router-dom'
 
-const NavBar = styled.div`
+const NavBar = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -35,7 +35,7 @@ const Menu = styled.nav`
     }
 `
 
-const User = styled.div`
+const User = styled.nav`
     display: flex;
 
     .user-noti, .user-profile {
@@ -61,8 +61,8 @@ const Header = () => {
                 </Link>
             </Menu>
             <User>
-                <div className="user-noti">notification</div>
-                <div className="user-profile">profile</div>
+                <button className="user-noti">notification</button>
+                <button className="user-profile">profile</button>
             </User>
         </NavBar>
     )

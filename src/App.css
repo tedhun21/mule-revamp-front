@@ -2,7 +2,7 @@
     box-sizing: border-box;
     padding:0;
     margin: 0;
-    font-family: -apple-system, 'Pretendard Medium', sans-serif;
+    font-family: 'IBM Plex Sans KR', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -14,19 +14,3 @@ code {
 a {
     text-decoration: none;
 }
-
-
-@font-face {
-    font-family: 'Pretendard Bold';
-    src: url(../public/font/Pretendard-ExtraBold.ttf);
-    font-family: 'Pretendard Bold';
-    src: url(../public/font/Pretendard-ExtraBold.otf);
-    font-family: 'Pretendard Medium';
-    src: url(../public/font/Pretendard-Medium.ttf);
-    font-family: 'Pretendard Medium';
-    src: url(../public/font/Pretendard-Medium.otf);
-    font-family: 'Pretendard Light';
-    src: url(../public/font/Pretendard-Light.ttf);
-    font-family: 'Pretendard Light';
-    src: url(../public/font/Pretendard-Light.otf);
-};

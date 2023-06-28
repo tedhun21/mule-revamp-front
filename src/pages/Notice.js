@@ -5,8 +5,12 @@ import { MainPage } from "./Home"
 
 const NoticePage = styled(MainPage)``
 
-const StyledList = styled.li`
-    list-style: none;
+const StyleUl = styled.ul`
+    display: flex;
+    padding: 40px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;   
 `
 
 const Notice = () => {
@@ -23,11 +27,9 @@ const Notice = () => {
     console.log(notices)
     return (
         <NoticePage>
-            <main>
-                <ul>
-                    {notices.map((notice) => <NoticeItem key={notice.id} notice={notice}/>)}
-                </ul>
-            </main>
+            <StyleUl>
+                {notices.map((notice) => <NoticeItem key={notice.id} notice={notice}/>)}
+            </StyleUl>
         </NoticePage>
     )
 }
