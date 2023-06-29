@@ -15,20 +15,20 @@ const CatDiv = styled.div`
     text-align: center;
     font-size: 12px;
     font-weight: 900;
-    min-width: 80px;
-
+    width: 80px;
 `
+
 const TitleDiv = styled.div`
     color: #000;
     font-size: 24px;
     letter-spacing: -1px;
-    min-width: 500px;
+    width: 500px;
 `
 
 const SubDiv = styled.div`
     color: #383838;
     font-size: 16px;
-    min-width: 300px;
+    width: 300px;
     display: flex;
     gap:10px;
 `

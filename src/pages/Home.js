@@ -7,6 +7,7 @@ export const MainPage = styled.main`
     background: rgba(255, 255, 255, 0.80);
     box-shadow: -4px 0px 20px 0px rgba(0, 0, 0, 0.30);
     overflow-y: scroll;
+    padding-left: 20px;
 `
 const Home = () => {
     return <MainPage>Hi</MainPage>

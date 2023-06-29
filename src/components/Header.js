@@ -37,11 +37,24 @@ const Menu = styled.nav`
 
 const User = styled.nav`
     display: flex;
+    gap: 10px;
 
     .user-noti, .user-profile {
-        display: flex;
-        padding: 30px;
-    }`
+        border-radius: 50px;
+        background: rgba(255, 255, 255, 0.10);
+        border: none;
+        width: 52px;
+        height: 52px;
+    }
+
+    .fa-solid {
+        font-size: 20px;
+        color: #fff;
+    }
+    
+`
+
+
 
 const Header = () => {
     return (
@@ -61,8 +74,12 @@ const Header = () => {
                 </Link>
             </Menu>
             <User>
-                <button className="user-noti">notification</button>
-                <button className="user-profile">profile</button>
+                <button className="user-noti">
+                    <i className="fa-solid fa-bell"></i>
+                </button>
+                <button className="user-profile">
+                    <i className="fa-solid fa-user"></i>
+                </button>
             </User>
         </NavBar>
     )
