@@ -1,5 +1,5 @@
 import { styled } from "styled-components"
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const NavBar = styled.header`
     display: flex;
@@ -33,6 +33,7 @@ const Menu = styled.nav`
         font-weight: 800;
         letter-spacing: -1px;
     }
+
 `
 
 const User = styled.nav`
@@ -51,7 +52,6 @@ const User = styled.nav`
         font-size: 20px;
         color: #fff;
     }
-    
 `
 
 
@@ -63,9 +63,9 @@ const Header = () => {
                 <Logo>Mule</Logo>
             </Link>
             <Menu>
-                <Link to="/notice">
+                <NavLink to="/notice" className={({isActive, isPending}) => isPending ? "pending" : isActive ? "active": ""}>
                     <div className="nav-notice">Notice</div>
-                </Link>
+                </NavLink>
                 <Link to="/market">
                     <div className="nav-market">Market</div>
                 </Link>

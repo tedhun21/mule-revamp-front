@@ -8,6 +8,10 @@ export const MainPage = styled.main`
     box-shadow: -4px 0px 20px 0px rgba(0, 0, 0, 0.30);
     overflow-y: scroll;
     padding-left: 20px;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `
 const Home = () => {
     return <MainPage>Hi</MainPage>

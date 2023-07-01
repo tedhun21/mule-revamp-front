@@ -1,13 +1,13 @@
 import { styled } from 'styled-components';
 
-const StyledLi = styled.li`
+export const StyledLi = styled.li`
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-` 
+`
 
-const CatDiv = styled.div`
+export const CatDiv = styled.div`
     padding: 10px;
     background: linear-gradient(180deg, #5466BD 0%, #8087AC 100%);
     border-radius: 50px;
@@ -18,14 +18,14 @@ const CatDiv = styled.div`
     width: 80px;
 `
 
-const TitleDiv = styled.div`
+export const TitleDiv = styled.div`
     color: #000;
     font-size: 24px;
     letter-spacing: -1px;
     width: 500px;
 `
 
-const SubDiv = styled.div`
+export const SubDiv = styled.div`
     color: #383838;
     font-size: 16px;
     width: 300px;
@@ -33,9 +33,7 @@ const SubDiv = styled.div`
     gap:10px;
 `
 
-// "2023-06-27T10:50:00.000Z"
 const NoticeItem = ({ notice }) => {
-    
     return (
         <StyledLi>
             <CatDiv>{notice.CAT}</CatDiv>

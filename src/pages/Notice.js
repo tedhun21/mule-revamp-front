@@ -6,31 +6,39 @@ import { MainPage } from "./Home"
 const NoticePage = styled(MainPage)`
 `
 
-const StyleUl = styled.ul`
+export const StyleUl = styled.ul`
     display: flex;
     padding: 40px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 30px;  
+    gap: 30px;
     border-radius: 30px 0px 0px 0px;
     background: rgba(255, 255, 255, 0.70);
+    overflow-x: hidden;
 `
 
-const CATNav = styled.nav`
+export const CATNav = styled.nav`
     display: flex;
     gap: 10px;
 `
 
-const HotDiv = styled.div`
+export const MainNotice = styled.div`
+    display: flex;
+    padding: 30px 0px;
+    gap: 20px;
+`
+
+export const HotDiv = styled.div`
     border-radius: 200px;
     background: #E2215B;
     box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.25);
     color: #FFF;
     font-size: 26px;
     font-weight: 900;
+    padding: 6px 14px;
 `
 
-const Announcement = styled.div`
+export const Announcement = styled.button`
     align-items: flex-start;
     min-width: fit-content;
     border-radius: 20px;
@@ -39,9 +47,23 @@ const Announcement = styled.div`
     color: #383838;
     font-size: 20px;
     font-weight: 900;
+    padding: 0px 20px;
+    border: none;
+
+    &:hover {
+        background: #fff;
+        transition: 500ms;
+        color: #E2215B;
+    }
+
+    &:active {
+        background: #FFF;
+        transition: 500ms;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.8) inset;
+    }
 `
 
-const CATButton = styled.button`
+export const CATButton = styled.button`
     height: 50px;
     padding: 10px 20px;
     border-radius: 30px;
@@ -54,7 +76,7 @@ const CATButton = styled.button`
     font-weight: 700;
     line-height: 130%;
     border: none;
-    width: 120px;
+    width: 140px;
 
     &:hover {
         background: #FFF;
@@ -80,8 +102,8 @@ const Notice = () => {
         fetch("http://localhost:3001/notice")
         .then((res) => res.json())
         .then((data) => {
-            setNotices(data.notices);
-            setFilteredNotices(data.notices);
+            setNotices(data.noticeItems);
+            setFilteredNotices(data.noticeItems);
         })
     }, [])
 
@@ -92,16 +114,15 @@ const Notice = () => {
             setFilteredNotices(notices.filter((notice)=> notice.CAT === noticeCat))
         }
     }
-    
     return (
         <NoticePage>
-            <div style={{"display":"flex", "padding":"10px", "gap": "10px"}} >
+            <MainNotice>
                 <HotDiv>HOT</HotDiv>
-                <Announcement>오디션은 공개 오디션만 등록 가능합니다.</Announcement>
-            </div>
+                <Announcement>2019년 3월 이전에 입력한 주소는 다시 입력해 주세요</Announcement>
+            </MainNotice>
             <StyleUl>
                 <CATNav>
-                    {noticeCats.map((noticeCat,index)=> {
+                    {noticeCats.map((noticeCat, index)=> {
                         return <CATButton key={index} onClick={() => handleCATClick(noticeCat)}>{noticeCat}</CATButton>
                     })}
                 </CATNav>
