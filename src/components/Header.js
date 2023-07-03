@@ -9,18 +9,18 @@ const NavBar = styled.header`
     width: 90%;
 `
 
-const Logo = styled.div`
+const Logo = styled.em`
         color: #FFF;
         text-align: center;
-        font-size: 48px;
-        font-family: Inter;
-        font-weight: 900;
-        letter-spacing: -1.92px;
+        font-size: 50px;
+        font-weight: bolder;
+        letter-spacing: -4px;
         margin: 40px;
 `
 const Menu = styled.nav`
     display: flex;
     gap: 50px;
+
     .nav-notice, .nav-market, .nav-news {
         display: flex;
         width: 100px;
@@ -30,7 +30,7 @@ const Menu = styled.nav`
         color: #FFF;
         font-size: 28px;
         font-family: Inter;
-        font-weight: 800;
+        font-weight: 900;
         letter-spacing: -1px;
     }
 

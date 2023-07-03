@@ -7,7 +7,12 @@ const GoodsCard = styled.figure`
     flex-direction:row;
     border-radius:20px;
     overflow:hidden;
-    width:440px;
+    width: 440px;
+    height: 280px;
+
+    img {
+        object-fit: cover;
+    }
 `
 
 const GoodsCap = styled.figcaption`
@@ -25,8 +30,8 @@ const GoodsCap = styled.figcaption`
         color: #E2215B;
         border-radius: 8px;
         border: 1px solid #E2215B;
-        width: 60px;
-        padding: 4px;
+        width: 80px;
+        padding: 4px 0px;
         text-align: center;
     }
 `

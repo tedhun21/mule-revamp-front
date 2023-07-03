@@ -6,6 +6,12 @@ import MarketItem from "../components/MarketItem";
 
 const MarketPage = styled(MainPage)``
 
+const GridSection = styled.section`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 40px;
+`
+
 const Market = () => {
     const [marketItems, setMareketItems] = useState([])
     const [filteredMarketItems, setFilteredMarketItems] = useState([])
@@ -26,11 +32,11 @@ const Market = () => {
                 <HotDiv>HOT</HotDiv>
                 <Announcement>[필독] 뮬 장터규정 업데이트 안내</Announcement>
             </MainNotice>
-            <section>
+            <GridSection>
                 {filteredMarketItems.map((item)=> {
                     return <MarketItem key={item.id} item={item} />
                 })}
-            </section>
+            </GridSection>
         </MarketPage>
     )
 }
