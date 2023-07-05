@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 const NavBar = styled.header`
   display: flex;
@@ -134,11 +135,100 @@ const GoogleLoginBtn = styled.button`
   border-color: #4285f4;
 `;
 
+const NotiModalBackdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
+
+const NotiModalView = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+
+  width: 465px;
+  height: 390px;
+  border-radius: 30px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const NotiTitle = styled.div`
+  border-bottom: solid;
+  width: 400px;
+  margin-bottom: 80px;
+  padding: 10px;
+  span {
+    padding: 10px;
+    font-size: 20px;
+  }
+`;
+
+const NotiContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+`;
+
+const NotiSettingBtn = styled.button`
+  width: 175px;
+  height: 50px;
+  border-radius: 20px;
+  border: 3px solid purple;
+  font-size: 15px;
+  color: purple;
+  font-weight: 600;
+  background-color: white;
+
+  &:hover {
+    background-color: #ffc7ee;
+  }
+`;
+
 const Header = () => {
+  const [isLogin, setIsLogin] = useState(false);
+
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
+  const [isOpenNotiModal, setIsOpenNotiModal] = useState(false);
+
+  const [userId, setUserId] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+
   const onLoginModalHandler = () => {
     setIsOpenLoginModal((prev) => !prev);
   };
+  const onNotiModalHandler = () => {
+    setIsOpenNotiModal((prev) => !prev);
+  };
+
+  const onChangeUserIdHandler = (e) => {
+    setUserId(e.target.value);
+  };
+  const onChangeUserPasswordHandler = (e) => {
+    setUserPassword(e.target.value);
+  };
+
+  const onSubmit = () => {
+    if (userId && userPassword) {
+      axios
+        .post("http://localhost:3001/login", { userId, userPassword })
+        .then((res) => {
+          setIsOpenLoginModal(false);
+          setIsLogin(true);
+          console.log(res.data);
+        });
+    }
+  };
+
   return (
     <NavBar>
       <Link to="/">
@@ -161,7 +251,7 @@ const Header = () => {
         </Link>
       </Menu>
       <User>
-        <button className="user-noti">
+        <button className="user-noti" onClick={onNotiModalHandler}>
           <i className="fa-solid fa-bell"></i>
         </button>
         <button className="user-profile" onClick={onLoginModalHandler}>
@@ -172,26 +262,51 @@ const Header = () => {
             <LoginModalView onClick={(e) => e.stopPropagation()}>
               <LoginTitleBox>로그인</LoginTitleBox>
               <div>
-                <InputBox id="id" type="text" placeholder="아이디" />
+                <InputBox
+                  onChange={onChangeUserIdHandler}
+                  type="text"
+                  placeholder="아이디"
+                />
               </div>
               <div>
-                <InputBox id="password" type="text" placeholder="비밀번호" />
+                <InputBox
+                  onChange={onChangeUserPasswordHandler}
+                  type="password"
+                  placeholder="비밀번호"
+                />
               </div>
-              <LoginBtn>로그인</LoginBtn>
+              <LoginBtn onClick={onSubmit}>로그인</LoginBtn>
               <SocialButton>
                 <KakaoLoginBtn>
                   <img
-                    src="../../public/image/kakaoSymbol.jpg"
-                    style={{ marginRight: "35px" }}
+                    src="../../public/image/kt.png"
+                    alt=""
+                    width="30"
+                    height="30"
                   />
-                  카카오 로그인
+                  <span>카카오 로그인</span>
                 </KakaoLoginBtn>
                 <GoogleLoginBtn>
-                  <img></img>Sign In with Google
+                  <img src="public/image/google.png" alt="" />
+                  <span>Sign In with Google</span>
                 </GoogleLoginBtn>
               </SocialButton>
             </LoginModalView>
           </LoginModalBackdrop>
+        ) : null}
+        {isOpenNotiModal ? (
+          <NotiModalBackdrop onClick={onNotiModalHandler}>
+            <NotiModalView onClick={(e) => e.stopPropagation()}>
+              <NotiTitle>
+                <span>알림</span>
+                <span style={{ color: "purple" }}>0</span>
+              </NotiTitle>
+              <NotiContent>
+                <div style={{ fontSize: "24px" }}>알림이 없습니다.</div>
+                <NotiSettingBtn>알림 설정하기</NotiSettingBtn>
+              </NotiContent>
+            </NotiModalView>
+          </NotiModalBackdrop>
         ) : null}
       </User>
     </NavBar>
