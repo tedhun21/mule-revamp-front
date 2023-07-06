@@ -11,33 +11,31 @@ const NavBar = styled.header`
   width: 90%;
 `;
 
-const Logo = styled.div`
-  color: #fff;
-  text-align: center;
-  font-size: 48px;
-  font-family: Inter;
-  font-weight: 900;
-  letter-spacing: -1.92px;
-  margin: 40px;
-`;
+const Logo = styled.em`
+        color: #FFF;
+        text-align: center;
+        font-size: 50px;
+        font-weight: bolder;
+        letter-spacing: -4px;
+        margin: 40px;
+`
 const Menu = styled.nav`
-  display: flex;
-  gap: 50px;
-  .nav-notice,
-  .nav-market,
-  .nav-news {
     display: flex;
-    width: 100px;
-    padding: 10px 10px;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-size: 28px;
-    font-family: Inter;
-    font-weight: 800;
-    letter-spacing: -1px;
-  }
-`;
+    gap: 50px;
+    .nav-notice, .nav-market, .nav-news {
+        display: flex;
+        width: 100px;
+        padding: 10px 10px;
+        justify-content: center;
+        align-items: center;
+        color: #FFF;
+        font-size: 28px;
+        font-family: Inter;
+        font-weight: 800;
+        letter-spacing: -1px;
+    }
+
+`
 
 const User = styled.nav`
   display: flex;
@@ -279,7 +277,7 @@ const Header = () => {
               <SocialButton>
                 <KakaoLoginBtn>
                   <img
-                    src="../../public/image/kt.png"
+                    src="/images/kt.png"
                     alt=""
                     width="30"
                     height="30"
@@ -287,7 +285,7 @@ const Header = () => {
                   <span>카카오 로그인</span>
                 </KakaoLoginBtn>
                 <GoogleLoginBtn>
-                  <img src="public/image/google.png" alt="" />
+                  <img src="/images/google.png" alt="" />
                   <span>Sign In with Google</span>
                 </GoogleLoginBtn>
               </SocialButton>
