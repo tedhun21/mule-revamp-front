@@ -3,6 +3,7 @@ import { MainPage } from "./Home"
 import { useState, useEffect } from "react";
 import { Announcement, HotDiv, MainNotice } from "./Notice";
 import MarketItem from "../components/MarketItem";
+import Modal from '../components/SearchModal'
 
 const MarketPage = styled(MainPage)``
 
@@ -31,6 +32,7 @@ const Market = () => {
             <MainNotice>
                 <HotDiv>HOT</HotDiv>
                 <Announcement>[필독] 뮬 장터규정 업데이트 안내</Announcement>
+                <Modal />
             </MainNotice>
             <GridSection>
                 {filteredMarketItems.map((item)=> {
