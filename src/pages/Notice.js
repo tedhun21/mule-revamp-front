@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import NoticeItem from "../components/NoticeItem";
 import { MainPage } from "./Home";
-import Modal from "../components/NewsSearchModal";
+import Modal from "../components/NoticeSerchModal";
 
 const NoticePage = styled(MainPage)``;
 
@@ -26,6 +26,7 @@ export const MainNotice = styled.div`
 	display: flex;
 	padding: 30px 0px;
 	gap: 20px;
+	height: 12%
 `;
 
 export const HotDiv = styled.div`
@@ -128,7 +129,7 @@ const Notice = () => {
 				<Announcement>
 					2019년 3월 이전에 입력한 주소는 다시 입력해 주세요
 				</Announcement>
-				<Modal />
+				<Modal notices={notices} setFilteredNotices={setFilteredNotices} />
 			</MainNotice>
 			<StyleUl>
 				<CATNav>
