@@ -12,37 +12,40 @@ const NavBar = styled.header`
 `;
 
 const Logo = styled.em`
-        color: #FFF;
-        text-align: center;
-        font-size: 50px;
-        font-weight: bolder;
-        letter-spacing: -4px;
-        margin: 40px;
-`
+  color: #fff;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bolder;
+  letter-spacing: -4px;
+  margin: 40px;
+`;
 const Menu = styled.nav`
+  display: flex;
+  gap: 50px;
+  .nav-notice,
+  .nav-market,
+  .nav-news {
     display: flex;
-    gap: 50px;
-    .nav-notice, .nav-market, .nav-news {
-        display: flex;
-        width: 100px;
-        padding: 10px 10px;
-        justify-content: center;
-        align-items: center;
-        color: #FFF;
-        font-size: 28px;
-        font-family: Inter;
-        font-weight: 800;
-        letter-spacing: -1px;
-    }
-
-`
+    width: 100px;
+    padding: 10px 10px;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 28px;
+    font-family: Inter;
+    font-weight: 800;
+    letter-spacing: -1px;
+  }
+`;
 
 const User = styled.nav`
   display: flex;
   gap: 10px;
 
   .user-noti,
-  .user-profile {
+  .user-profile,
+  .login-btn,
+  .logout-btn {
     border-radius: 50px;
     background: rgba(255, 255, 255, 0.1);
     border: none;
@@ -80,7 +83,7 @@ const LoginModalView = styled.div`
   align-items: center;
 
   border-radius: 30px;
-  gap: 10px;
+  gap: 5px;
 `;
 
 const LoginTitleBox = styled.div`
@@ -97,7 +100,7 @@ const LoginTitleBox = styled.div`
 `;
 
 const InputBox = styled.input`
-  width: 480px;
+  width: 400px;
   height: 60px;
   border-radius: 50px;
   border: 1px solid #5c5959;
@@ -105,12 +108,12 @@ const InputBox = styled.input`
 
   padding: 22px;
   font-size: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 const LoginBtn = styled.button`
   height: 60px;
-  width: 500px;
+  width: 400px;
   border-radius: 20px;
   background: linear-gradient(156deg, #c13fad 0%, #5964bd 100%);
   font-size: 30px;
@@ -118,19 +121,52 @@ const LoginBtn = styled.button`
   letter-spacing: 10px;
 `;
 
-const SocialButton = styled.div``;
+const SocialButton = styled.div`
+  display: flex;
+  gap: 40px;
+  margin-top: 15px;
+`;
 
 const KakaoLoginBtn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
   width: 185px;
   height: 45px;
   border-radius: 12px;
   background: #fee500;
   border: none;
+
+  img {
+    width: 25px;
+    height: 25px;
+    margin-right: 30px;
+  }
 `;
 const GoogleLoginBtn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   color: #fff;
   background: #4285f4;
   border-color: #4285f4;
+  border-radius: 5px;
+
+  img {
+    width: 35px;
+    height: 35px;
+    margin: 2px;
+
+    border-radius: 3px 0 0 3px;
+
+    background-color: white;
+  }
+  span {
+    margin: 10px;
+  }
 `;
 
 const NotiModalBackdrop = styled.div`
@@ -214,6 +250,9 @@ const Header = () => {
   const onChangeUserPasswordHandler = (e) => {
     setUserPassword(e.target.value);
   };
+  const onLogOut = () => {
+    setIsLogin(false);
+  };
 
   const onSubmit = () => {
     if (userId && userPassword) {
@@ -249,12 +288,25 @@ const Header = () => {
         </Link>
       </Menu>
       <User>
-        <button className="user-noti" onClick={onNotiModalHandler}>
-          <i className="fa-solid fa-bell"></i>
-        </button>
-        <button className="user-profile" onClick={onLoginModalHandler}>
-          <i className="fa-solid fa-user"></i>
-        </button>
+        {isLogin ? (
+          <button className="user-noti" onClick={onNotiModalHandler}>
+            <i className="fa-solid fa-bell"></i>
+          </button>
+        ) : null}
+        {isLogin ? (
+          <button className="user-profile">
+            <i className="fa-solid fa-user"></i>
+          </button>
+        ) : (
+          <button className="login-btn" onClick={onLoginModalHandler}>
+            <i className="fa-solid fa-right-to-bracket"></i>
+          </button>
+        )}
+        {isLogin ? (
+          <button className="logout-btn" onClick={onLogOut}>
+            <i className="fa-solid fa-right-from-bracket"></i>
+          </button>
+        ) : null}
         {isOpenLoginModal ? (
           <LoginModalBackdrop onClick={onLoginModalHandler}>
             <LoginModalView onClick={(e) => e.stopPropagation()}>
@@ -276,12 +328,7 @@ const Header = () => {
               <LoginBtn onClick={onSubmit}>로그인</LoginBtn>
               <SocialButton>
                 <KakaoLoginBtn>
-                  <img
-                    src="/images/kt.png"
-                    alt=""
-                    width="30"
-                    height="30"
-                  />
+                  <img src="/images/kt.png" alt="" />
                   <span>카카오 로그인</span>
                 </KakaoLoginBtn>
                 <GoogleLoginBtn>
