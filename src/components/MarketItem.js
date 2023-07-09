@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-const GoodsCard = styled.figure`
+export const GoodsCard = styled.figure`
     background: #fff;
     display: flex;
     flex-direction:row;
@@ -14,7 +14,7 @@ const GoodsCard = styled.figure`
     }
 `
 
-const GoodsCap = styled.figcaption`
+export const GoodsCap = styled.figcaption`
   display: flex;
   flex-direction: column;
   padding: 20px;
