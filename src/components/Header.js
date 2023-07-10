@@ -19,6 +19,7 @@ const Logo = styled.em`
   letter-spacing: -4px;
   margin: 40px;
 `;
+
 const Menu = styled.nav`
   display: flex;
   gap: 50px;
@@ -60,12 +61,13 @@ const User = styled.nav`
 `;
 
 const LoginModalBackdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1;
 `;
 
 const LoginModalView = styled.div`
@@ -145,6 +147,7 @@ const KakaoLoginBtn = styled.button`
     margin-right: 30px;
   }
 `;
+
 const GoogleLoginBtn = styled.button`
   display: flex;
   justify-content: center;

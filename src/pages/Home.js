@@ -46,19 +46,6 @@ const Adver = styled.div`
 	background-color: aqua;
 `;
 
-const CarouselContainer = styled.article`
-	display: inline-flex;
-	padding: 20px;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 10px;
-	border-radius: 30px;
-	background: rgba(255, 255, 255, 0.4);
-	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.25);
-	width: 45%;
-	height: 100%;
-`;
-
 export const MainPage = styled.main`
 	width: 90%;
 	height: 100%;
@@ -99,7 +86,6 @@ const Home = () => {
 				<Bottom>
 					{carouselItems.length > 0 ? (
 						<>
-							<Carousel items={carouselItems} />
 							<Carousel items={carouselItems} />
 						</>
 					) : (

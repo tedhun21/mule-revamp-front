@@ -37,6 +37,7 @@ export const HotDiv = styled.div`
 	font-size: 26px;
 	font-weight: 900;
 	padding: 6px 14px;
+	height: 50px;
 `;
 
 export const Announcement = styled.button`
@@ -50,6 +51,7 @@ export const Announcement = styled.button`
 	font-weight: 900;
 	padding: 0px 20px;
 	border: none;
+	height: 50px;
 
 	&:hover {
 		background: #fff;
