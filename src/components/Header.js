@@ -41,6 +41,7 @@ const Menu = styled.nav`
 const User = styled.nav`
   display: flex;
   gap: 10px;
+  margin-right: 10px;
 
   .user-noti,
   .user-profile,
@@ -195,6 +196,27 @@ const NotiModalView = styled.div`
   align-items: center;
 `;
 
+const ExitLoginBtn = styled.button`
+  position: absolute;
+  right: 5%;
+  top: 5%;
+
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.4);
+  font-weight: 400;
+  text-align: center;
+  background: #fff;
+
+  border: none;
+  border-radius: 30px;
+
+  &:hover {
+    background: #eae9ef;
+  }
+`;
+
 const NotiTitle = styled.div`
   border-bottom: solid;
   width: 400px;
@@ -237,6 +259,8 @@ const Header = () => {
   const [userId, setUserId] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   const onLoginModalHandler = () => {
     setIsOpenLoginModal((prev) => !prev);
   };
@@ -261,8 +285,10 @@ const Header = () => {
         .then((res) => {
           setIsOpenLoginModal(false);
           setIsLogin(true);
+          setErrorMessage("");
           console.log(res.data);
-        });
+        })
+        .catch((err) => setErrorMessage(err.response.data));
     }
   };
 
@@ -310,6 +336,7 @@ const Header = () => {
         {isOpenLoginModal ? (
           <LoginModalBackdrop onClick={onLoginModalHandler}>
             <LoginModalView onClick={(e) => e.stopPropagation()}>
+              <ExitLoginBtn onClick={onLoginModalHandler}>X</ExitLoginBtn>
               <LoginTitleBox>로그인</LoginTitleBox>
               <div>
                 <InputBox
@@ -325,6 +352,9 @@ const Header = () => {
                   placeholder="비밀번호"
                 />
               </div>
+              {errorMessage ? (
+                <div style={{ color: "red" }}>{errorMessage}</div>
+              ) : null}
               <LoginBtn onClick={onSubmit}>로그인</LoginBtn>
               <SocialButton>
                 <KakaoLoginBtn>
