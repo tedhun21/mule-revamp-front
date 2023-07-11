@@ -2,16 +2,15 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const CarouselContainer = styled.div`
-	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 	overflow: hidden;
 `;
 
 const CarouselWrapper = styled.div`
 	display: flex;
 	transition: transform 0.5s ease-in-out;
-	width: 96%;
 `;
-
 
 const CarouselItem = styled.figure`
 	background: #fff;
@@ -20,7 +19,7 @@ const CarouselItem = styled.figure`
 	flex-direction: column;
 	border-radius: 20px;
 	padding: 10px;
-	margin: 2%;
+	margin: 10px;
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.4);
 
 	img {
@@ -57,7 +56,7 @@ const SlideCarousel = ({ items }) => {
 	return (
 		<CarouselContainer>
 			<CarouselWrapper
-				style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+				style={{ transform: `translateX(-${activeIndex * 10}%)` }}
 			>
 				{items.map((item, index) => (
 					<CarouselItem key={index}>

@@ -119,7 +119,8 @@ export const handleModalClick = (event) => {
 
 export default function NewsSearchModal({ news, setFilteredNews }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectData, setSelectData] = useState("전체");
+  const [selectCatData, setSelectCatData] = useState("전체");
+  const [searchArea, setSearchArea] = useState("전체");
   const [searchValue, setSearchValue] = useState("");
 
   const openModalHandler = () => {
