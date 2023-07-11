@@ -1,6 +1,8 @@
 import { styled } from "styled-components";
 import Carousel from "../components/Carousel";
 import { useEffect, useState } from "react";
+import RecentBlock from "../components/RecentBlock";
+import axios from "axios";
 
 const Container = styled.div`
 	display: flex;
@@ -13,30 +15,17 @@ const Container = styled.div`
 
 const Top = styled.section`
 	display: flex;
-	justify-content: center;
-	gap: 3%;
+	justify-content: space-around;
+	gap: 30px;
 	padding: 30px 0px;
 	height: 40%;
 	max-width: 1500px;
 	min-height: 240px;
+	overflow: hidden;
 `;
 
 const Bottom = styled(Top)`
 	height: 50%;
-`;
-
-const RecentBlock = styled.article`
-	display: flex;
-	padding: 40px;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
-	gap: 20px;
-	width: 31%;
-	height: 100%;
-	border-radius: 30px;
-	background: linear-gradient(345deg, #c13fad 0%, #e81b4c 100%);
-	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.4);
 `;
 
 const Adver = styled.div`
@@ -60,33 +49,34 @@ export const MainPage = styled.main`
 	}
 `;
 const Home = () => {
-	const [carouselItems, setCarouselItems] = useState([]);
+	const [marketItems, setMarketItems] = useState([]);
+	const [noticeItems, setNoticeItems] = useState([]);
+	const [newsItems, setNewsItems] = useState([]);
 
 	useEffect(() => {
-		Promise.all([
-			fetch("http://localhost:3001/market").then((res) => res.json())
-		])
-			.then(([marketData]) => {
-				const carouselData = marketData.marketItems;
-				setCarouselItems(carouselData);
-			})
-			.catch((error) => {
-				console.error("Error fetching carousel items:", error);
-			});
+		axios
+			.get("http://localhost:3001/market")
+			.then((res) => setMarketItems(res.data.marketItems));
+		axios
+			.get("http://localhost:3001/notice")
+			.then((res) => setNoticeItems(res.data.noticeItems));
+		axios
+			.get("http://localhost:3001/news")
+			.then((res) => setNewsItems(res.data.newsItems));
 	}, []);
 
 	return (
 		<MainPage>
 			<Container>
 				<Top>
-					<RecentBlock>1</RecentBlock>
-					<RecentBlock>2</RecentBlock>
+					<RecentBlock items={noticeItems} isNotice={true}/>
+					<RecentBlock items={newsItems} isNotice={false}/>
 					<Adver></Adver>
 				</Top>
 				<Bottom>
-					{carouselItems.length > 0 ? (
+					{marketItems.length > 0 ? (
 						<>
-							<Carousel items={carouselItems} />
+							<Carousel items={marketItems} />
 						</>
 					) : (
 						<div>Loading...</div>
