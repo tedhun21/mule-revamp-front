@@ -16,7 +16,7 @@ export const ModalBackdrop = styled.div`
 	bottom: 0;
 	display: flex;
 	justify-content: center;
-	align-items: last baseline;
+	align-items: center;
 `;
 
 export const ModalBtn = styled.button`
@@ -34,11 +34,6 @@ export const ModalBtn = styled.button`
 export const ModalView = styled.div.attrs(() => ({
 	role: "dialog",
 }))`
-	width: 800px;
-	height: 600px;
-	border-radius: 20px;
-	background: #fff;
-	margin-bottom: 200px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -46,11 +41,17 @@ export const ModalView = styled.div.attrs(() => ({
 	position: relative;
 	cursor: default; /* 기본 커서: 내부 클릭 이벤트 차단 */
 
+	width: 600px;
+	height: 400px;
+	border-radius: 20px;
+	background: #fff;
+
 	.desc {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: flex-end;
 		gap: 1rem;
+		padding-top: 50px;
 	}
 `;
 
@@ -63,15 +64,44 @@ export const AccordionSet = styled.div`
 	font-size: 18px;
 `;
 
-export const ExitBtn = styled(ModalBtn)`
-	background: white;
-	color: black;
-	width: 50px;
-	height: 50px;
-	font-size: 20px;
+export const ModalHeader = styled.header`
 	position: absolute;
-	right: 0;
 	top: 0;
+
+	width: 600px;
+	background: linear-gradient(129deg, #c240ae 0%, #775bb9 71.36%, #5966be 100%);
+	border-radius: 20px 20px 0px 0px;
+	color: white;
+	font-weight: 800;
+	font-size: 26px;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 20px;
+
+	div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	div > * {
+		padding: 10px;
+	}
+`;
+
+export const ExitBtn = styled.button`
+	background: none;
+	color: white;
+	width: 40px;
+	height: 40px;
+	font-size: 26px;
+	border: none;
+
+	&:hover {
+		background: rgba(255, 255, 255, 0.15);
+	}
 `;
 
 export const SearchInputWrapper = styled.div`
@@ -195,7 +225,13 @@ export default function NewsSearchModal({ news, setFilteredNews }) {
 				{isOpen === false ? null : (
 					<ModalBackdrop>
 						<ModalView onClick={handleModalClick}>
-							<ExitBtn onClick={openModalHandler}>X</ExitBtn>
+							<ModalHeader>
+								<div>
+									<i className="fa-sharp fa-solid fa-magnifying-glass"></i>
+									<span>검색</span>
+								</div>
+								<ExitBtn onClick={openModalHandler}>X</ExitBtn>
+							</ModalHeader>
 							<div className="desc">
 								<AccordionSet>
 									<label htmlFor="category">카테고리</label>

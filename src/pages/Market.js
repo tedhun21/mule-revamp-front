@@ -17,6 +17,7 @@ const Market = () => {
 	const [marketItems, setMarketItems] = useState([]);
 	const [filteredMarketItems, setFilteredMarketItems] = useState([]);
 
+
 	useEffect(() => {
 		fetch("http://localhost:3001/market")
 			.then((res) => res.json())

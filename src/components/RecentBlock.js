@@ -34,7 +34,7 @@ const BlockItem = styled.li`
 `;
 
 export default function RecentBlock({ items, isNotice }) {
-	console.log(items);
+	
 
 	return (
 		<Block>

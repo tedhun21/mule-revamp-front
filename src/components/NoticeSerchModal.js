@@ -12,6 +12,7 @@ import {
 	SearchButton,
 	ModalAccordionDef,
 	handleModalClick,
+	ModalHeader,
 } from "./NewsSearchModal";
 
 export default function NoticeSeachModal({ notices, setFilteredNotices }) {
@@ -96,7 +97,13 @@ export default function NoticeSeachModal({ notices, setFilteredNotices }) {
 				{isOpen === false ? null : (
 					<ModalBackdrop>
 						<ModalView onClick={handleModalClick}>
-							<ExitBtn onClick={openModalHandler}>X</ExitBtn>
+							<ModalHeader>
+								<div>
+									<i className="fa-sharp fa-solid fa-magnifying-glass"></i>
+									<span>검색</span>
+								</div>
+								<ExitBtn onClick={openModalHandler}>X</ExitBtn>
+							</ModalHeader>{" "}
 							<div className="desc">
 								<AccordionSet>
 									<label htmlFor="category">카테고리</label>

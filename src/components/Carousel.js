@@ -5,11 +5,13 @@ const CarouselContainer = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	overflow: hidden;
+	z-index: 0;
 `;
 
 const CarouselWrapper = styled.div`
 	display: flex;
 	transition: transform 0.5s ease-in-out;
+	z-index: 0;
 `;
 
 const CarouselItem = styled.figure`
@@ -21,6 +23,7 @@ const CarouselItem = styled.figure`
 	padding: 10px;
 	margin: 10px;
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.4);
+	z-index: 0;
 
 	img {
 		border-radius: 20px;

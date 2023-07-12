@@ -26,6 +26,8 @@ const Top = styled.section`
 
 const Bottom = styled(Top)`
 	height: 50%;
+	z-index: 0;
+
 `;
 
 const Adver = styled.div`
