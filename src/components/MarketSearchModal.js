@@ -15,8 +15,6 @@ import {
 	ModalHeader,
 } from "./NewsSearchModal";
 
-// "베이스", "레코딩/PA/키보드", "어쿠스틱/클래식기타", "이펙터", "일렉기타", "앰프", "그외"
-
 const CatData = [
 	{ cat: "전체", subData: ["전체"] },
 	{ cat: "베이스", subData: ["일렉베이스"] },
@@ -108,7 +106,6 @@ export default function MarketSeachModal({
 					}
 				})
 				.filter((item) => (item.onsale ? true : false));
-			console.log(filtered);
 
 			setFilteredMarketItems(filtered);
 			setSelectMainData("전체");
@@ -119,27 +116,6 @@ export default function MarketSeachModal({
 			setIsOpen(false);
 		}
 	};
-
-	console.log(checked);
-	// 제목 닉네임 본문
-	/*
-const data = [
-  { name: "John", age: 25, city: "New York" },
-  { name: "Jane", age: 30, city: "San Francisco" },
-  { name: "Mark", age: 35, city: "Chicago" },
-  { name: "Emily", age: 28, city: "Los Angeles" },
-];
-
-const filteredData = data
-
-// 첫 번째 필터링 조건: 나이가 25보다 큰 경우
-  .filter(item => item.age > 25)  
-
-// 두 번째 필터링 조건: 도시가 "New York"인 경우
-  .filter(item => item.city === "New York");  
-
-console.log(filteredData);
-*/
 
 	return (
 		<>
@@ -176,6 +152,8 @@ console.log(filteredData);
 										<option value="앰프">앰프</option>
 										<option value="그외">그외</option>
 									</ModalAccordionDef>
+								</AccordionSet>
+								<AccordionSet>
 									<label>중분류</label>
 									<ModalAccordionDef
 										id="subCAT-select"
@@ -205,14 +183,6 @@ console.log(filteredData);
 										<option value="닉네임">닉네임</option>
 									</ModalAccordionDef>
 								</AccordionSet>
-								<div>
-									<input
-										type="checkbox"
-										checked={checked}
-										onChange={() => setChecked((prev) => !prev)}
-									/>
-									<label htmlFor="onSale"> 판매 중인 상품만 보기</label>
-								</div>
 								<SearchInputWrapper>
 									<label htmlFor="search">검색어</label>
 									<SearchInput
@@ -223,6 +193,14 @@ console.log(filteredData);
 										onKeyDown={handleSearch}
 									/>
 								</SearchInputWrapper>
+								<div id="onsalecheck">
+									<input
+										type="checkbox"
+										checked={checked}
+										onChange={() => setChecked((prev) => !prev)}
+									/>
+									<label htmlFor="onSale"> 판매 중인 상품만 보기</label>
+								</div>
 								<SearchButton onClick={handleSearch}>
 									<SearchIcon className="fa-sharp fa-solid fa-magnifying-glass" />
 									검색하기

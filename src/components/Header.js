@@ -3,6 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
+import Dropdown from "./Dropdown";
+
 const NavBar = styled.header`
 	display: flex;
 	align-items: center;
@@ -45,6 +47,7 @@ const User = styled.nav`
 	margin-right: 20px;
 	width: 176px;
 	justify-content: right;
+	position: relative;
 
 	.user-noti,
 	.user-profile,
@@ -262,9 +265,13 @@ const Header = () => {
 
 	const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
 	const [isOpenNotiModal, setIsOpenNotiModal] = useState(false);
+	const [isOpenProfileModal, setIsOpenProfileModal] = useState(false);
 
 	const [userId, setUserId] = useState("");
 	const [userPassword, setUserPassword] = useState("");
+
+	const [user, setUser] = useState({});
+	const [checkedCookie, setCheckedCookie] = useState(false);
 
 	const [errorMessage, setErrorMessage] = useState("");
 
@@ -273,6 +280,10 @@ const Header = () => {
 	};
 	const onNotiModalHandler = () => {
 		setIsOpenNotiModal((prev) => !prev);
+	};
+
+	const onProfileModalHandler = () => {
+		setIsOpenProfileModal((prev) => !prev);
 	};
 
 	const onChangeUserIdHandler = (e) => {
@@ -285,18 +296,26 @@ const Header = () => {
 		setIsLogin(false);
 	};
 
-	const onSubmit = () => {
-		if (userId && userPassword) {
-			axios
-				.post("http://localhost:3001/login", { userId, userPassword })
-				.then((res) => {
-					setIsOpenLoginModal(false);
-					setIsLogin(true);
-					setErrorMessage("");
-				})
-				.catch((err) => {
-					setErrorMessage(err.response.data);
-				});
+	const onSubmit = (event) => {
+		if (event.key === "Enter" || event.type === "click") {
+			if (userId && userPassword) {
+				axios
+					.post("http://localhost:3001/login", {
+						userId,
+						userPassword,
+						checkedCookie,
+					})
+					.then((res) => {
+						setIsOpenLoginModal(false);
+						setIsLogin(true);
+						setErrorMessage("");
+						setUser(res.data);
+						console.log(res);
+					})
+					.catch((err) => {
+						setErrorMessage(err.response.data);
+					});
+			}
 		}
 	};
 
@@ -328,7 +347,7 @@ const Header = () => {
 					</button>
 				) : null}
 				{isLogin ? (
-					<button className="user-profile">
+					<button className="user-profile" onClick={onProfileModalHandler}>
 						<i className="fa-solid fa-user"></i>
 					</button>
 				) : (
@@ -336,6 +355,7 @@ const Header = () => {
 						<i className="fa-solid fa-right-to-bracket"></i>
 					</button>
 				)}
+				{isOpenProfileModal ? <Dropdown user={user} /> : null}
 				{isLogin ? (
 					<button className="logout-btn" onClick={onLogOut}>
 						<i className="fa-solid fa-right-from-bracket"></i>
@@ -355,10 +375,20 @@ const Header = () => {
 							</div>
 							<div>
 								<InputBox
+									onKeyDown={onSubmit}
 									onChange={onChangeUserPasswordHandler}
 									type="password"
 									placeholder="비밀번호"
 								/>
+							</div>
+							<div>
+								<input
+									type="checkbox"
+									checked={checkedCookie}
+									onChange={() => setCheckedCookie((prev) => !prev)}
+								/>
+
+								<label> 로그인 정보 기억하기</label>
 							</div>
 							{errorMessage ? (
 								<div style={{ color: "red" }}>{errorMessage}</div>

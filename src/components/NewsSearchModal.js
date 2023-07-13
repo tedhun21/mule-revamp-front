@@ -49,9 +49,13 @@ export const ModalView = styled.div.attrs(() => ({
 	.desc {
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-end;
 		gap: 1rem;
 		padding-top: 50px;
+		font-size: 16px;
+
+		#onsalecheck {
+			margin-left: 35px;
+		}
 	}
 `;
 
@@ -59,7 +63,7 @@ export const AccordionSet = styled.div`
 	display: flex;
 	flex-direction: row;
 	gap: 1rem;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
 	font-size: 18px;
 `;
@@ -128,7 +132,7 @@ export const SearchButton = styled.button`
 	align-items: center;
 	border: none;
 	color: white;
-	padding: 10px;
+	padding: 2px 12px;
 	background: linear-gradient(129deg, #c240ae 0%, #775bb9 71.36%, #5966be 100%);
 	border-radius: 20px;
 	font-size: 18px;
