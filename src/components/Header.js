@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { Link, NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 import Dropdown from "./Dropdown";
@@ -293,24 +293,39 @@ const Header = () => {
 		setUserPassword(e.target.value);
 	};
 	const onLogOut = () => {
-		setIsLogin(false);
+		axios
+			.post("http://localhost:3001/logout")
+			.then((res) => {
+				if(res.status === 205){
+					setIsLogin(false);
+					setIsOpenLoginModal(false);
+					setIsOpenNotiModal(false);
+					setIsOpenProfileModal(false);
+					setUser({})
+				}
+			})
 	};
 
 	const onSubmit = (event) => {
 		if (event.key === "Enter" || event.type === "click") {
 			if (userId && userPassword) {
 				axios
-					.post("http://localhost:3001/login", {
-						userId,
-						userPassword,
-						checkedCookie,
-					})
+					.post(
+						"http://localhost:3001/login",
+						{
+							userId,
+							userPassword,
+							checkedCookie,
+						},
+						{
+							withCredentials: true,
+						}
+					)
 					.then((res) => {
 						setIsOpenLoginModal(false);
 						setIsLogin(true);
 						setErrorMessage("");
 						setUser(res.data);
-						console.log(res);
 					})
 					.catch((err) => {
 						setErrorMessage(err.response.data);
@@ -318,6 +333,17 @@ const Header = () => {
 			}
 		}
 	};
+	
+
+	useEffect(() => {
+		axios
+			.get("http://localhost:3001/userinfo", { withCredentials: true })
+			.then((res) => {
+				setIsLogin(true);
+				setUser(res.data);
+			})
+			.catch((err) => console.log(err.response.data));
+	}, []);
 
 	return (
 		<NavBar>

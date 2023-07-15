@@ -44,7 +44,7 @@ const DropdownContent = styled.main`
 	font-size: 16px;
 
 	div:last-child {
-		div:last-child {
+		p {
 			color: #383838;
 			font-size: 15px;
 		}
@@ -52,7 +52,6 @@ const DropdownContent = styled.main`
 `;
 
 const Dropdown = ({ user }) => {
-	console.log(user);
 	return (
 		<DropdownContainer onClick={(e) => e.stopPropagation()}>
 			<DropdownHeader>
@@ -63,11 +62,13 @@ const Dropdown = ({ user }) => {
 			</DropdownHeader>
 			<hr />
 			<DropdownContent>
-				<div>활동 점수 : 점</div>
-				<div>잔여 포인트: P</div>
+				<div>활동 점수 : {user.score} 점</div>
+				<div>잔여 포인트: {user.point}P</div>
 				<div>
 					<div>관심 분야</div>
-					<div>어쩌구, 저쩌구, 123, abc</div>
+					{user.interests.map((interest, index) => (
+						<p key={index}>{interest}</p>
+					))}
 				</div>
 			</DropdownContent>
 		</DropdownContainer>
@@ -84,13 +85,4 @@ export default Dropdown;
             잔여 포인트: { point } P
             관심 분야
             어쩌구, 저쩌구, 123, abc
-
-userData: [
-    {
-      id: 1,
-      userId: "kimcoding",
-      password: "1234",
-    },
-  ],
-
 */

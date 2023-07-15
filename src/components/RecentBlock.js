@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 const Block = styled.article`
 	display: flex;
-	padding: 20px;
+	padding: 30px;
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;

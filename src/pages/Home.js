@@ -27,14 +27,15 @@ const Top = styled.section`
 const Bottom = styled(Top)`
 	height: 50%;
 	z-index: 0;
-
 `;
 
 const Adver = styled.div`
 	border-radius: 30px;
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.4);
 	width: 26%;
-	background-color: aqua;
+	background: url(./images/AdImg.jpg);
+	background-position: center center;
+	background-size: cover;
 `;
 
 export const MainPage = styled.main`
@@ -71,8 +72,8 @@ const Home = () => {
 		<MainPage>
 			<Container>
 				<Top>
-					<RecentBlock items={noticeItems} isNotice={true}/>
-					<RecentBlock items={newsItems} isNotice={false}/>
+					<RecentBlock items={noticeItems} isNotice={true} />
+					<RecentBlock items={newsItems} isNotice={false} />
 					<Adver></Adver>
 				</Top>
 				<Bottom>

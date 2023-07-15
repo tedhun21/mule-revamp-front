@@ -175,49 +175,53 @@ export default function NewsSearchModal({ news, setFilteredNews }) {
 		setSearchValue(event.target.value);
 	};
 
-	const handleSearch = () => {
-		// 둘 다 전체가 들어올때
-		if (selectCatData === "전체" && searchArea === "전체") {
-			setFilteredNews([...news]);
-		}
-
-		// CAT만 데이터가 들어올때
-		else if (selectCatData && searchArea === "전체")
-			setFilteredNews(news.filter((notice) => notice.CAT === selectCatData));
-		// AREA만 데이터가 들어올때
-		else if (selectCatData === "전체" && searchArea) {
-			if (searchArea === "제목") {
-				// title
-				setFilteredNews(
-					news.filter((notice) => notice.title.includes(searchValue))
-				);
-			} else if (searchArea === "본문") {
-				// content
-				setFilteredNews(
-					news.filter((notice) => notice.content.includes(searchValue))
-				);
-			} else if (searchArea === "닉네임") {
-				//author
-				setFilteredNews(news.filter((notice) => notice.author === searchValue));
+	const handleSearch = (event) => {
+		if (event.key === "Enter" || event.type === "click") {
+			// 둘 다 전체가 들어올때
+			if (selectCatData === "전체" && searchArea === "전체") {
+				setFilteredNews([...news]);
 			}
-		} else {
-			setFilteredNews(
-				news
-					.filter((news) => news.CAT === selectCatData)
-					.filter((news) => {
-						if (searchArea === "닉네임") return news.author === searchValue;
-						else if (searchArea === "제목")
-							return news.title.includes(searchValue);
-						else if (searchArea === "본문")
-							return news.content.includes(searchValue);
-						return false;
-					})
-			);
+
+			// CAT만 데이터가 들어올때
+			else if (selectCatData && searchArea === "전체")
+				setFilteredNews(news.filter((notice) => notice.CAT === selectCatData));
+			// AREA만 데이터가 들어올때
+			else if (selectCatData === "전체" && searchArea) {
+				if (searchArea === "제목") {
+					// title
+					setFilteredNews(
+						news.filter((notice) => notice.title.includes(searchValue))
+					);
+				} else if (searchArea === "본문") {
+					// content
+					setFilteredNews(
+						news.filter((notice) => notice.content.includes(searchValue))
+					);
+				} else if (searchArea === "닉네임") {
+					//author
+					setFilteredNews(
+						news.filter((notice) => notice.author === searchValue)
+					);
+				}
+			} else {
+				setFilteredNews(
+					news
+						.filter((news) => news.CAT === selectCatData)
+						.filter((news) => {
+							if (searchArea === "닉네임") return news.author === searchValue;
+							else if (searchArea === "제목")
+								return news.title.includes(searchValue);
+							else if (searchArea === "본문")
+								return news.content.includes(searchValue);
+							return false;
+						})
+				);
+			}
+			setIsOpen(false);
+			setSelectCatData("전체");
+			setSearchArea("전체");
+			setSearchValue("");
 		}
-		setIsOpen(false);
-		setSelectCatData("전체");
-		setSearchArea("전체");
-		setSearchValue("");
 	};
 
 	return (
@@ -271,6 +275,7 @@ export default function NewsSearchModal({ news, setFilteredNews }) {
 										placeholder="Search..."
 										value={searchValue}
 										onChange={handleInputChange}
+										onKeyDown={handleSearch}
 									/>
 								</SearchInputWrapper>
 								<SearchButton onClick={handleSearch}>
