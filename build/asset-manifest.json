@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/mule-revamp-front/static/css/main.d90bf6ca.css",
+    "main.js": "/mule-revamp-front/static/js/main.fbb794b8.js",
+    "index.html": "/mule-revamp-front/index.html",
+    "main.d90bf6ca.css.map": "/mule-revamp-front/static/css/main.d90bf6ca.css.map",
+    "main.fbb794b8.js.map": "/mule-revamp-front/static/js/main.fbb794b8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d90bf6ca.css",
+    "static/js/main.fbb794b8.js"
+  ]
+}
