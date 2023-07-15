@@ -54,6 +54,29 @@ export const ModalView = styled.div.attrs(() => ({
   }
 `;
 
+export const ModalHeader = styled.header`
+  position: absolute;
+  top: 0;
+  width: 600px;
+  background: linear-gradient(129deg, #c240ae 0%, #775bb9 71.36%, #5966be 100%);
+  border-radius: 20px 20px 0px 0px;
+  color: white;
+  font-weight: 800;
+  font-size: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  div > * {
+    padding: 10px;
+  }
+`;
+
 export const AccordionSet = styled.div`
   display: flex;
   flex-direction: row;
@@ -127,8 +150,8 @@ export default function NewsSearchModal({ news, setFilteredNews }) {
     setIsOpen(!isOpen);
   };
 
-  const handleChangeSelect = (event) => {
-    setSelectData(event.target.value);
+  const handleChangeCatSelect = (event) => {
+    setSelectCatData(event.target.value);
   };
 
   const handleInputChange = (event) => {
@@ -210,7 +233,7 @@ export default function NewsSearchModal({ news, setFilteredNews }) {
                   <ModalAccordionDef
                     id="field-select"
                     value={searchArea}
-                    onChange={handleChangeAreaSelect}
+                    onChange={handleChangeCatSelect}
                   >
                     <option value="">전체</option>
                     <option value="제목">제목</option>
