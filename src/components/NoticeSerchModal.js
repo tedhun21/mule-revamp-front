@@ -12,6 +12,7 @@ import {
 	SearchButton,
 	ModalAccordionDef,
 	handleModalClick,
+	ModalHeader,
 } from "./NewsSearchModal";
 
 export default function NoticeSeachModal({ notices, setFilteredNotices }) {
@@ -38,53 +39,55 @@ export default function NoticeSeachModal({ notices, setFilteredNotices }) {
 		setSearchValue(event.target.value);
 	};
 
-	const handleSearch = () => {
-		// 둘 다 전체가 들어올때
-		if (selectCatData === "전체" && searchArea === "전체") {
-			setFilteredNotices([...notices]);
-		}
+	const handleSearch = (event) => {
+		if (event.key === "Enter" || event.type === "click") {
+			// 둘 다 전체가 들어올때
+			if (selectCatData === "전체" && searchArea === "전체") {
+				setFilteredNotices([...notices]);
+			}
 
-		// CAT만 데이터가 들어올때
-		else if (selectCatData && searchArea === "전체")
-			setFilteredNotices(
-				notices.filter((notice) => notice.CAT === selectCatData)
-			);
-		// AREA만 데이터가 들어올때
-		else if (selectCatData === "전체" && searchArea) {
-			if (searchArea === "제목") {
-				// title
+			// CAT만 데이터가 들어올때
+			else if (selectCatData && searchArea === "전체")
 				setFilteredNotices(
-					notices.filter((notice) => notice.title.includes(searchValue))
+					notices.filter((notice) => notice.CAT === selectCatData)
 				);
-			} else if (searchArea === "본문") {
-				// content
+			// AREA만 데이터가 들어올때
+			else if (selectCatData === "전체" && searchArea) {
+				if (searchArea === "제목") {
+					// title
+					setFilteredNotices(
+						notices.filter((notice) => notice.title.includes(searchValue))
+					);
+				} else if (searchArea === "본문") {
+					// content
+					setFilteredNotices(
+						notices.filter((notice) => notice.content.includes(searchValue))
+					);
+				} else if (searchArea === "닉네임") {
+					//author
+					setFilteredNotices(
+						notices.filter((notice) => notice.author === searchValue)
+					);
+				}
+			} else {
 				setFilteredNotices(
-					notices.filter((notice) => notice.content.includes(searchValue))
-				);
-			} else if (searchArea === "닉네임") {
-				//author
-				setFilteredNotices(
-					notices.filter((notice) => notice.author === searchValue)
+					notices
+						.filter((notice) => notice.CAT === selectCatData)
+						.filter((notice) => {
+							if (searchArea === "닉네임") return notice.author === searchValue;
+							else if (searchArea === "제목")
+								return notice.title.includes(searchValue);
+							else if (searchArea === "본문")
+								return notice.content.includes(searchValue);
+							return false;
+						})
 				);
 			}
-		} else {
-			setFilteredNotices(
-				notices
-					.filter((notice) => notice.CAT === selectCatData)
-					.filter((notice) => {
-						if (searchArea === "닉네임") return notice.author === searchValue;
-						else if (searchArea === "제목")
-							return notice.title.includes(searchValue);
-						else if (searchArea === "본문")
-							return notice.content.includes(searchValue);
-						return false;
-					})
-			);
+			setIsOpen(false);
+			setSelectCatData("전체");
+			setSearchArea("전체");
+			setSearchValue("");
 		}
-		setIsOpen(false);
-		setSelectCatData("전체");
-		setSearchArea("전체");
-		setSearchValue("");
 	};
 
 	return (
@@ -96,7 +99,13 @@ export default function NoticeSeachModal({ notices, setFilteredNotices }) {
 				{isOpen === false ? null : (
 					<ModalBackdrop>
 						<ModalView onClick={handleModalClick}>
-							<ExitBtn onClick={openModalHandler}>X</ExitBtn>
+							<ModalHeader>
+								<div>
+									<i className="fa-sharp fa-solid fa-magnifying-glass"></i>
+									<span>검색</span>
+								</div>
+								<ExitBtn onClick={openModalHandler}>X</ExitBtn>
+							</ModalHeader>{" "}
 							<div className="desc">
 								<AccordionSet>
 									<label htmlFor="category">카테고리</label>
@@ -133,6 +142,7 @@ export default function NoticeSeachModal({ notices, setFilteredNotices }) {
 										placeholder="Search..."
 										value={searchValue}
 										onChange={handleInputChange}
+										onKeyDown={handleSearch}
 									/>
 								</SearchInputWrapper>
 								<SearchButton onClick={handleSearch}>

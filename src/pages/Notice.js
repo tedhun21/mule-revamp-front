@@ -52,6 +52,7 @@ export const Announcement = styled.button`
 	padding: 0px 20px;
 	border: none;
 	height: 50px;
+	overflow: hidden;
 
 	&:hover {
 		background: #fff;

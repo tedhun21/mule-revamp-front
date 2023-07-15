@@ -16,7 +16,7 @@ export const ModalBackdrop = styled.div`
   bottom: 0;
   display: flex;
   justify-content: center;
-  align-items: last baseline;
+  align-items: center;
 `;
 
 export const ModalBtn = styled.button`
@@ -136,12 +136,48 @@ export default function NewsSearchModal({ news, setFilteredNews }) {
   };
 
   const handleSearch = () => {
-    if (selectData === "전체") {
+    // 둘 다 전체가 들어올때
+    if (selectCatData === "전체" && searchArea === "전체") {
       setFilteredNews([...news]);
+    }
+
+    // CAT만 데이터가 들어올때
+    else if (selectCatData && searchArea === "전체")
+      setFilteredNews(news.filter((notice) => notice.CAT === selectCatData));
+    // AREA만 데이터가 들어올때
+    else if (selectCatData === "전체" && searchArea) {
+      if (searchArea === "제목") {
+        // title
+        setFilteredNews(
+          news.filter((notice) => notice.title.includes(searchValue)),
+        );
+      } else if (searchArea === "본문") {
+        // content
+        setFilteredNews(
+          news.filter((notice) => notice.content.includes(searchValue)),
+        );
+      } else if (searchArea === "닉네임") {
+        //author
+        setFilteredNews(news.filter((notice) => notice.author === searchValue));
+      }
     } else {
-      setFilteredNews(news.filter((news) => news.CAT === selectData));
+      setFilteredNews(
+        news
+          .filter((news) => news.CAT === selectCatData)
+          .filter((news) => {
+            if (searchArea === "닉네임") return news.author === searchValue;
+            else if (searchArea === "제목")
+              return news.title.includes(searchValue);
+            else if (searchArea === "본문")
+              return news.content.includes(searchValue);
+            return false;
+          }),
+      );
     }
     setIsOpen(false);
+    setSelectCatData("전체");
+    setSearchArea("전체");
+    setSearchValue("");
   };
 
   return (
@@ -159,8 +195,8 @@ export default function NewsSearchModal({ news, setFilteredNews }) {
                   <label htmlFor="category">카테고리</label>
                   <ModalAccordionDef
                     id="cat-select"
-                    value={selectData}
-                    onChange={handleChangeSelect}
+                    value={selectCatData}
+                    onChange={handleChangeCatSelect}
                   >
                     <option value="전체">전체</option>
                     <option value="공연/세미나">공연/세미나</option>
@@ -171,7 +207,11 @@ export default function NewsSearchModal({ news, setFilteredNews }) {
                 </AccordionSet>
                 <AccordionSet>
                   <label htmlFor="field">검색영역</label>
-                  <ModalAccordionDef id="field-select">
+                  <ModalAccordionDef
+                    id="field-select"
+                    value={searchArea}
+                    onChange={handleChangeAreaSelect}
+                  >
                     <option value="">전체</option>
                     <option value="제목">제목</option>
                     <option value="본문">본문</option>

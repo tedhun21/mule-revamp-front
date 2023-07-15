@@ -1,7 +1,9 @@
 import { styled } from "styled-components";
 import { Link, NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+
+import Dropdown from "./Dropdown";
 
 const NavBar = styled.header`
   display: flex;
@@ -42,7 +44,10 @@ const Menu = styled.nav`
 const User = styled.nav`
   display: flex;
   gap: 10px;
-  margin-right: 10px;
+  margin-right: 20px;
+  width: 176px;
+  justify-content: right;
+  position: relative;
 
   .user-noti,
   .user-profile,
@@ -62,13 +67,13 @@ const User = styled.nav`
 `;
 
 const LoginModalBackdrop = styled.div`
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-	z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 `;
 
 const LoginModalView = styled.div`
@@ -122,6 +127,7 @@ const LoginBtn = styled.button`
   font-size: 30px;
   color: #fff;
   letter-spacing: 10px;
+  border: none;
 `;
 
 const SocialButton = styled.div`
@@ -180,6 +186,7 @@ const NotiModalBackdrop = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 `;
 
 const NotiModalView = styled.div`
@@ -197,27 +204,6 @@ const NotiModalView = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const ExitLoginBtn = styled.button`
-  position: absolute;
-  right: 5%;
-  top: 5%;
-
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
-  box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.4);
-  font-weight: 400;
-  text-align: center;
-  background: #fff;
-
-  border: none;
-  border-radius: 30px;
-
-  &:hover {
-    background: #eae9ef;
-  }
 `;
 
 const NotiTitle = styled.div`
@@ -258,17 +244,20 @@ const Header = () => {
 
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
   const [isOpenNotiModal, setIsOpenNotiModal] = useState(false);
+  const [isOpenProfileModal, setIsOpenProfileModal] = useState(false);
 
   const [userId, setUserId] = useState("");
   const [userPassword, setUserPassword] = useState("");
-
-  const [errorMessage, setErrorMessage] = useState("");
 
   const onLoginModalHandler = () => {
     setIsOpenLoginModal((prev) => !prev);
   };
   const onNotiModalHandler = () => {
     setIsOpenNotiModal((prev) => !prev);
+  };
+
+  const onProfileModalHandler = () => {
+    setIsOpenProfileModal((prev) => !prev);
   };
 
   const onChangeUserIdHandler = (e) => {
@@ -278,7 +267,15 @@ const Header = () => {
     setUserPassword(e.target.value);
   };
   const onLogOut = () => {
-    setIsLogin(false);
+    axios.post("http://localhost:3001/logout").then((res) => {
+      if (res.status === 205) {
+        setIsLogin(false);
+        setIsOpenLoginModal(false);
+        setIsOpenNotiModal(false);
+        setIsOpenProfileModal(false);
+        setUser({});
+      }
+    });
   };
 
   const onSubmit = () => {
@@ -288,10 +285,8 @@ const Header = () => {
         .then((res) => {
           setIsOpenLoginModal(false);
           setIsLogin(true);
-          setErrorMessage("");
           console.log(res.data);
-        })
-        .catch((err) => setErrorMessage(err.response.data));
+        });
     }
   };
 
@@ -339,7 +334,6 @@ const Header = () => {
         {isOpenLoginModal ? (
           <LoginModalBackdrop onClick={onLoginModalHandler}>
             <LoginModalView onClick={(e) => e.stopPropagation()}>
-              <ExitLoginBtn onClick={onLoginModalHandler}>X</ExitLoginBtn>
               <LoginTitleBox>로그인</LoginTitleBox>
               <div>
                 <InputBox
@@ -355,9 +349,6 @@ const Header = () => {
                   placeholder="비밀번호"
                 />
               </div>
-              {errorMessage ? (
-                <div style={{ color: "red" }}>{errorMessage}</div>
-              ) : null}
               <LoginBtn onClick={onSubmit}>로그인</LoginBtn>
               <SocialButton>
                 <KakaoLoginBtn>
