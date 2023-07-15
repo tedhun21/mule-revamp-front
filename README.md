@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/3kiein/mule-revamp-front/assets/129928230/83f1e9a5-9ceb-4c75-a580-a4f3d9ed8b47" />
+  <img src="https://github.com/3kiein/mule-revamp-front/assets/129928230/63c7c0f4-92f9-4379-bca9-314bbda73c1f" />
 </p>
 
 # Mule Revamp Project
@@ -30,6 +30,9 @@
 #### 그럼에도, 본질은 잊지 않아야 하니까
 
 색상 코드 등 스타일적인 바탕 요소들은 레퍼런스 사이트를 차용했습니다.
+
+## User Flow
+![스크린샷 2023-07-15 오후 4 38 37](https://github.com/3kiein/mule-revamp-front/assets/129928230/ba82a644-2d35-442a-b896-082cb6c99562)
 
 ## STACK
 
@@ -68,6 +71,9 @@
 | ![스크린샷 2023-07-15 오후 5 20 55](https://github.com/3kiein/mule-revamp-front/assets/129928230/9dd6acf6-01c7-4723-a486-c9c9bf748f30) | ![스크린샷 2023-07-15 오후 5 21 13](https://github.com/3kiein/mule-revamp-front/assets/129928230/28857f2e-0c8b-44b2-8a32-09763d24c5af) | ![스크린샷 2023-07-15 오후 5 21 27](https://github.com/3kiein/mule-revamp-front/assets/129928230/f0ed9942-f051-4e7c-bf3e-b7c80b8760cd) | ![스크린샷 2023-07-15 오후 7 15 15](https://github.com/3kiein/mule-revamp-front/assets/129928230/3fb88ee8-17ef-4d68-8e89-1ca212864378) |
 | 활동 점수 및 포인트 변경을 동적 구현 | 댓글 등 누적된 알림 확인창 | 쿠키를 이용한 로그인 | 페이지별 카테고리 구성에 대응 가능한 검색 모달 |
 | 드롭다운으로 간결함 증가 |  | 소셜 로그인 추후 구현 예정 | 중첩 검색 필터링 |
+
+Market Carousel  
+![Carousel](https://github.com/3kiein/mule-revamp-front/assets/129928230/043548c2-c489-4169-86bf-e838973226c7)
 
 ## Architecture
 ### front
