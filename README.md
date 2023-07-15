@@ -27,3 +27,15 @@
 ### 그럼에도, 본질은 잊지 않아야 하니까
 
 색상 코드 등 스타일적인 바탕 요소들은 레퍼런스 사이트를 차용했습니다.
+
+## STACK
+
+### Environment
+
+### Config
+
+### Development
+
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black%22%3E"/><img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white%22%3E"/>
+
+### Communication
